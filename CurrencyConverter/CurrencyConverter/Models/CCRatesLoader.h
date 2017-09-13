@@ -1,10 +1,11 @@
 #import <Foundation/Foundation.h>
 #import "CCRatesParser.h"
+#import "CCDataLoader.h"
 
 @interface CCRatesLoader : NSObject
 
-- (instancetype)initWithUrlString:(NSString *)urlString
-                           parser:(id <CCRatesParser>)ratesParser;
+- (instancetype)initWithDataLoader:(id <CCDataLoader>)dataLoader
+                            parser:(id <CCRatesParser>)ratesParser;
 
 - (void)loadRatesSuccess:(void (^)(NSDictionary *ratesMap))success
                     fail:(void (^)(NSError *error))fail

@@ -18,7 +18,7 @@
 		766D148B1F67E3F600AA10E8 /* CurrencyConverterUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D148A1F67E3F600AA10E8 /* CurrencyConverterUITests.m */; };
 		766D149A1F67E42700AA10E8 /* CCCurrencyConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14991F67E42700AA10E8 /* CCCurrencyConverter.m */; };
 		766D149E1F67E45E00AA10E8 /* CCRatesLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D149D1F67E45E00AA10E8 /* CCRatesLoader.m */; };
-		766D14A11F67E48500AA10E8 /* CCDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14A01F67E48500AA10E8 /* CCDataLoader.m */; };
+		766D14A11F67E48500AA10E8 /* CCRemoteDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14A01F67E48500AA10E8 /* CCRemoteDataLoader.m */; };
 		766D14A51F67E4F800AA10E8 /* CCRatesParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14A41F67E4F800AA10E8 /* CCRatesParserTests.m */; };
 		766D14AA1F67E9C100AA10E8 /* CCJSONRatesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14A91F67E9C100AA10E8 /* CCJSONRatesParser.m */; };
 		766D14AD1F67EA5800AA10E8 /* CCFloatingBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14AC1F67EA5800AA10E8 /* CCFloatingBackgroundView.m */; };
@@ -32,6 +32,8 @@
 		766D14C11F67FDB100AA10E8 /* NSLayoutConstraint+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14C01F67FDB100AA10E8 /* NSLayoutConstraint+Helpers.m */; };
 		766D14C41F68036F00AA10E8 /* CCCurrencyCarouselViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14C31F68036F00AA10E8 /* CCCurrencyCarouselViewController.m */; };
 		766D14C71F680F2E00AA10E8 /* InitialRatesMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 766D14C61F680F2E00AA10E8 /* InitialRatesMap.plist */; };
+		766D14CB1F69592700AA10E8 /* CCLocalDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14CA1F69592600AA10E8 /* CCLocalDataLoader.m */; };
+		766D14CD1F695B5100AA10E8 /* CCRatesLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14CC1F695B5100AA10E8 /* CCRatesLoaderTests.m */; };
 		F288A7BCC338C5F0940966B6 /* libPods-CurrencyConverterUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB5548A53154BF175EDD6E2C /* libPods-CurrencyConverterUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -75,8 +77,8 @@
 		766D14991F67E42700AA10E8 /* CCCurrencyConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCCurrencyConverter.m; path = Models/CCCurrencyConverter.m; sourceTree = "<group>"; };
 		766D149C1F67E45E00AA10E8 /* CCRatesLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRatesLoader.h; path = Models/CCRatesLoader.h; sourceTree = "<group>"; };
 		766D149D1F67E45E00AA10E8 /* CCRatesLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRatesLoader.m; path = Models/CCRatesLoader.m; sourceTree = "<group>"; };
-		766D149F1F67E48500AA10E8 /* CCDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCDataLoader.h; path = Models/CCDataLoader.h; sourceTree = "<group>"; };
-		766D14A01F67E48500AA10E8 /* CCDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCDataLoader.m; path = Models/CCDataLoader.m; sourceTree = "<group>"; };
+		766D149F1F67E48500AA10E8 /* CCRemoteDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRemoteDataLoader.h; path = Models/CCRemoteDataLoader.h; sourceTree = "<group>"; };
+		766D14A01F67E48500AA10E8 /* CCRemoteDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRemoteDataLoader.m; path = Models/CCRemoteDataLoader.m; sourceTree = "<group>"; };
 		766D14A21F67E49500AA10E8 /* CCRatesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRatesParser.h; path = Models/CCRatesParser.h; sourceTree = "<group>"; };
 		766D14A41F67E4F800AA10E8 /* CCRatesParserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRatesParserTests.m; sourceTree = "<group>"; };
 		766D14A81F67E9C100AA10E8 /* CCJSONRatesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCJSONRatesParser.h; path = Models/CCJSONRatesParser.h; sourceTree = "<group>"; };
@@ -97,6 +99,10 @@
 		766D14C21F68036F00AA10E8 /* CCCurrencyCarouselViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCCurrencyCarouselViewController.h; path = ViewControllers/CCCurrencyCarouselViewController.h; sourceTree = "<group>"; };
 		766D14C31F68036F00AA10E8 /* CCCurrencyCarouselViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCCurrencyCarouselViewController.m; path = ViewControllers/CCCurrencyCarouselViewController.m; sourceTree = "<group>"; };
 		766D14C61F680F2E00AA10E8 /* InitialRatesMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InitialRatesMap.plist; path = Resources/InitialRatesMap.plist; sourceTree = "<group>"; };
+		766D14C81F6958C100AA10E8 /* CCDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCDataLoader.h; path = Models/CCDataLoader.h; sourceTree = "<group>"; };
+		766D14C91F69592600AA10E8 /* CCLocalDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCLocalDataLoader.h; path = Models/CCLocalDataLoader.h; sourceTree = "<group>"; };
+		766D14CA1F69592600AA10E8 /* CCLocalDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCLocalDataLoader.m; path = Models/CCLocalDataLoader.m; sourceTree = "<group>"; };
+		766D14CC1F695B5100AA10E8 /* CCRatesLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRatesLoaderTests.m; sourceTree = "<group>"; };
 		7738C2FFE76221AD6B76BDFD /* Pods-CurrencyConverterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverterUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyConverterUITests/Pods-CurrencyConverterUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BE3CD2789DF010AFA5425CBA /* Pods-CurrencyConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyConverter/Pods-CurrencyConverter.debug.xcconfig"; sourceTree = "<group>"; };
 		DB5548A53154BF175EDD6E2C /* libPods-CurrencyConverterUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CurrencyConverterUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +219,7 @@
 				766D14A41F67E4F800AA10E8 /* CCRatesParserTests.m */,
 				766D14B11F67ECD000AA10E8 /* CCDataLoaderTests.m */,
 				766D14BB1F67F2B100AA10E8 /* CCCurrencyStringTests.m */,
+				766D14CC1F695B5100AA10E8 /* CCRatesLoaderTests.m */,
 			);
 			path = CurrencyConverterTests;
 			sourceTree = "<group>";
@@ -233,11 +240,14 @@
 				766D14991F67E42700AA10E8 /* CCCurrencyConverter.m */,
 				766D149C1F67E45E00AA10E8 /* CCRatesLoader.h */,
 				766D149D1F67E45E00AA10E8 /* CCRatesLoader.m */,
-				766D149F1F67E48500AA10E8 /* CCDataLoader.h */,
-				766D14A01F67E48500AA10E8 /* CCDataLoader.m */,
+				766D149F1F67E48500AA10E8 /* CCRemoteDataLoader.h */,
+				766D14A01F67E48500AA10E8 /* CCRemoteDataLoader.m */,
 				766D14A21F67E49500AA10E8 /* CCRatesParser.h */,
 				766D14A81F67E9C100AA10E8 /* CCJSONRatesParser.h */,
 				766D14A91F67E9C100AA10E8 /* CCJSONRatesParser.m */,
+				766D14C81F6958C100AA10E8 /* CCDataLoader.h */,
+				766D14C91F69592600AA10E8 /* CCLocalDataLoader.h */,
+				766D14CA1F69592600AA10E8 /* CCLocalDataLoader.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -587,12 +597,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766D14CB1F69592700AA10E8 /* CCLocalDataLoader.m in Sources */,
 				766D149A1F67E42700AA10E8 /* CCCurrencyConverter.m in Sources */,
 				766D14AD1F67EA5800AA10E8 /* CCFloatingBackgroundView.m in Sources */,
 				766D149E1F67E45E00AA10E8 /* CCRatesLoader.m in Sources */,
 				766D146A1F67E3F600AA10E8 /* AppDelegate.m in Sources */,
 				766D14C41F68036F00AA10E8 /* CCCurrencyCarouselViewController.m in Sources */,
-				766D14A11F67E48500AA10E8 /* CCDataLoader.m in Sources */,
+				766D14A11F67E48500AA10E8 /* CCRemoteDataLoader.m in Sources */,
 				766D14671F67E3F500AA10E8 /* main.m in Sources */,
 				766D14BA1F67F1C100AA10E8 /* NSString+Currency.m in Sources */,
 				766D14B01F67EC8500AA10E8 /* CCCurrencyConverterViewController.m in Sources */,
@@ -605,6 +616,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766D14CD1F695B5100AA10E8 /* CCRatesLoaderTests.m in Sources */,
 				766D14A51F67E4F800AA10E8 /* CCRatesParserTests.m in Sources */,
 				766D14BC1F67F2B100AA10E8 /* CCCurrencyStringTests.m in Sources */,
 				766D14801F67E3F600AA10E8 /* CurrencyConverterTests.m in Sources */,

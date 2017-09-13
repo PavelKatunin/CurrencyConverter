@@ -1,5 +1,5 @@
 #import <XCTest/XCTest.h>
-#import "CCDataLoader.h"
+#import "CCLocalDataLoader.h"
 
 @interface CCDataLoaderTests : XCTestCase
 
@@ -14,7 +14,7 @@
          stringByAppendingPathComponent:@"CorrectCurrenciesRates.json"];
     XCTAssertNotNil(filePath);
     
-    CCDataLoader *dataLoader = [[CCDataLoader alloc] initWithURLString:[@"file:/" stringByAppendingString:filePath]];
+    id <CCDataLoader> dataLoader = [[CCLocalDataLoader alloc] initWithURLString:filePath];
 
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Data Loader"];
     

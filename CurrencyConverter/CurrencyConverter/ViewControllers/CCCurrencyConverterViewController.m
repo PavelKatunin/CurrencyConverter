@@ -5,6 +5,7 @@
 #import "NSLayoutConstraint+Helpers.h"
 #import "CCJSONRatesParser.h"
 #import "CCCurrencyCarouselViewController.h"
+#import "CCRemoteDataLoader.h"
 
 static const NSInteger kBackgroundBubblesCount = 5;
 static const NSInteger kMaxAmountLength = 10;
@@ -53,9 +54,12 @@ static NSDictionary *AttributesForRatesField() {
     
     if (self) {
         CCJSONRatesParser *ratesParser = [[CCJSONRatesParser alloc] init];
-        self.ratesLoader = [[CCRatesLoader alloc] initWithUrlString:kRatesURL
-                                                             parser:ratesParser];
+        CCRemoteDataLoader *remoteDataLoader = [[CCRemoteDataLoader alloc] initWithURLString:kRatesURL];
+        
+        self.ratesLoader = [[CCRatesLoader alloc] initWithDataLoader:remoteDataLoader
+                                                              parser:ratesParser];
         self.converter = [[CCCurrencyConverter alloc] initWithCurrencyRatesMap:[self localRatesMap]];
+        
         [self updateRates];
         
         self.currentFromCurrency = self.converter.currencies[0];

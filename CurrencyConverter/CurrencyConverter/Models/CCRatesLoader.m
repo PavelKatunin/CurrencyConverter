@@ -4,7 +4,7 @@
 
 @interface CCRatesLoader ()
 
-@property(strong) CCDataLoader *dataLoader;
+@property(strong) id <CCDataLoader> dataLoader;
 @property(strong) id <CCRatesParser> ratesParser;
 
 @end
@@ -13,12 +13,12 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithUrlString:(NSString *)urlString
-                           parser:(id <CCRatesParser>)ratesParser {
+- (instancetype)initWithDataLoader:(id <CCDataLoader>)dataLoader
+                            parser:(id <CCRatesParser>)ratesParser {
     self = [super init];
     
     if (self) {
-        self.dataLoader = [[CCDataLoader alloc] initWithURLString:urlString];
+        self.dataLoader = dataLoader;
         self.ratesParser = [[CCJSONRatesParser alloc] init];
     }
     

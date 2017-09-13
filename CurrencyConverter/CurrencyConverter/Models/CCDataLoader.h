@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface CCDataLoader : NSObject
+@protocol CCDataLoader <NSObject>
 
 - (instancetype)initWithURLString:(NSString *)urlString;
 

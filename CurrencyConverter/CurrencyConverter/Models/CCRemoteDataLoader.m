@@ -1,12 +1,12 @@
-#import "CCDataLoader.h"
+#import "CCRemoteDataLoader.h"
 
-@interface CCDataLoader ()
+@interface CCRemoteDataLoader ()
 
 @property(copy) NSURL *url;
 
 @end
 
-@implementation CCDataLoader
+@implementation CCRemoteDataLoader
 
 #pragma mark - Initialization
 
@@ -24,42 +24,12 @@
                    fail:(void (^)(NSError *error))fail
             targetQueue:(dispatch_queue_t)queue {
     
-    if ([self.url isFileURL]) {
-        [self loadDataFromLocalSuccess:success
-                                  fail:fail
-                           targetQueue:queue];
-    }
-    else {
-        [self loadDataFromRemoteSuccess:success
-                                   fail:fail
-                            targetQueue:queue];
-    }
+    [self loadDataFromRemoteSuccess:success
+                               fail:fail
+                        targetQueue:queue];
 }
 
 #pragma mark - Private methods
-
-- (void)loadDataFromLocalSuccess:(void (^)(NSData *data))success
-                            fail:(void (^)(NSError *error))fail
-                     targetQueue:(dispatch_queue_t)queue{
-    
-    NSString * strNoURLScheme =
-        [self.url.absoluteString stringByReplacingOccurrencesOfString:[self.url scheme] withString:@""];
-    NSData *data = [NSData dataWithContentsOfFile:strNoURLScheme];
-    
-    if (data) {
-        dispatch_async(queue, ^{
-            success(data);
-        });
-    }
-    else {
-        dispatch_async(queue, ^{
-            NSError *error = [[NSError alloc] initWithDomain:@"NilData"
-                                                        code:1
-                                                    userInfo:@{}];
-            fail(error);
-        });
-    }
-}
 
 - (void)loadDataFromRemoteSuccess:(void (^)(NSData *data))success
                             fail:(void (^)(NSError *error))fail

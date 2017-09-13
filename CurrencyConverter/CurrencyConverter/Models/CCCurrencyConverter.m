@@ -6,7 +6,8 @@
 #pragma mark - Properties
 
 - (NSArray *)currencies {
-    return [[self.currencyRatesMap allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+    return [[self.currencyRatesMap allKeys]
+            sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
     }];
 }
