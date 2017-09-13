@@ -36,4 +36,4 @@ iCarousel https://github.com/nicklockwood/iCarousel
 1. Add EarlGrey and UI tests . 
 2. Setup CI / CD pipeline to run Unit and UI tests on every push . 
 3. Copy to clipboard by tapping on result amount . 
-4. Addd visual recognition for sum images . 
+4. Add visual recognition for sum images . 
