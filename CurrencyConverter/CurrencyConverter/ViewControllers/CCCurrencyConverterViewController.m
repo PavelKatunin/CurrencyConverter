@@ -2,10 +2,10 @@
 #import "CCRatesLoader.h"
 #import "CCCurrencyConverter.h"
 #import "CCFloatingBackgroundView.h"
-#import "NSLayoutConstraint+Helpers.h"
 #import "CCJSONRatesParser.h"
 #import "CCCurrencyCarouselViewController.h"
 #import "CCRemoteDataLoader.h"
+#import "CCCurrencyConverterViewController+Layout.h"
 
 static const NSInteger kBackgroundBubblesCount = 5;
 static const NSInteger kMaxAmountLength = 10;
@@ -23,17 +23,7 @@ static NSDictionary *AttributesForRatesField() {
 
 @interface CCCurrencyConverterViewController () <UITextFieldDelegate, CCCurrencyCarouselViewControllerDelegate>
 
-// UI
-@property(nonatomic, weak) UIView *backgroundView;
-@property(nonatomic, weak) UIView *currentCurrenciesHighlightView;
-@property(nonatomic, weak) UITextField *inputAmountTextField;
-@property(nonatomic, weak) UIView *fromCurrencyCarouselView;
-@property(nonatomic, weak) UIView *toCurrencyCarouselView;
-@property(nonatomic, weak) UIButton *invertCurrenciesButton;
-@property(nonatomic, weak) UILabel *resultAmountLabel;
-@property(nonatomic, weak) UILabel *rateBetweenCurrenciesLabel;
-
-// Controller
+// Controllers
 @property(nonatomic, weak) CCCurrencyCarouselViewController *fromCurrencyCarousel;
 @property(nonatomic, weak) CCCurrencyCarouselViewController *toCurrencyCarousel;
 
@@ -148,28 +138,40 @@ static NSDictionary *AttributesForRatesField() {
     self.rateBetweenCurrenciesLabel.attributedText =
         [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.02f %@ in 1 %@",
                                                     rateBetweenCurrencies,
-                                                    self.currentToCurrency,
-                                                    self.currentFromCurrency]
+                                                    self.currentToCurrency.uppercaseString,
+                                                    self.currentFromCurrency.uppercaseString]
                                         attributes:AttributesForRatesField()];
 }
 
 - (void)setupSubviews {
-    // background
+    [self setupBackgroundView];
+    [self setupHighlightView];
+    [self setupInputAmountTextField];
+    [self setupFromCarousel];
+    [self setupInvertButton];
+    [self setupToCarousel];
+    [self setupResultAmountLabel];
+    [self setupRateBetweenCurrenciesLabel];
+}
+
+- (void)setupBackgroundView {
     CCFloatingBackgroundView *backgroundView =
         [[CCFloatingBackgroundView alloc] initWithBubblesCount:kBackgroundBubblesCount];
     backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:backgroundView];
     self.backgroundView = backgroundView;
-    
-    // current currencies highlight view
+}
+
+- (void)setupHighlightView {
     UIView *highlightView = [[UIView alloc] init];
     highlightView.translatesAutoresizingMaskIntoConstraints = NO;
     highlightView.backgroundColor = [UIColor blackColor];
     highlightView.alpha = 0.2;
     [self.view addSubview:highlightView];
     self.currentCurrenciesHighlightView = highlightView;
-    
-    // input text field
+}
+
+- (void)setupInputAmountTextField {
     UITextField *inputAmountTextField = [[UITextField alloc] init];
     inputAmountTextField.translatesAutoresizingMaskIntoConstraints = NO;
     inputAmountTextField.keyboardType = UIKeyboardTypeNumberPad;
@@ -179,16 +181,18 @@ static NSDictionary *AttributesForRatesField() {
     inputAmountTextField.delegate = self;
     [self.view addSubview:inputAmountTextField];
     self.inputAmountTextField = inputAmountTextField;
-    
-    // from currency carousel
+}
+
+- (void)setupFromCarousel {
     CCCurrencyCarouselViewController *fromCarousel = [self createCurrencyCarouselViewController];
     self.fromCurrencyCarousel = fromCarousel;
     [self addChildViewController:fromCarousel];
     [self.view addSubview:fromCarousel.view];
     self.fromCurrencyCarouselView = fromCarousel.view;
     [fromCarousel didMoveToParentViewController:self];
-    
-    // invert button
+}
+
+- (void)setupInvertButton {
     UIButton *invertButton = [[UIButton alloc] init];
     UIImage *image = [[UIImage imageNamed:@"invert"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [invertButton setImage:image forState:UIControlStateNormal];
@@ -199,23 +203,26 @@ static NSDictionary *AttributesForRatesField() {
                      action:@selector(invertCurrencies:)
            forControlEvents:UIControlEventTouchUpInside];
     self.invertCurrenciesButton = invertButton;
-    
-    // to currency carousel
+}
+
+- (void)setupToCarousel {
     CCCurrencyCarouselViewController *toCarousel = [self createCurrencyCarouselViewController];
     self.toCurrencyCarousel = toCarousel;
     [self addChildViewController:toCarousel];
     [self.view addSubview:toCarousel.view];
     self.toCurrencyCarouselView = toCarousel.view;
     [toCarousel didMoveToParentViewController:self];
-    
-    // result amount label
+}
+
+- (void)setupResultAmountLabel {
     UILabel *resultAmountLabel = [[UILabel alloc] init];
     resultAmountLabel.translatesAutoresizingMaskIntoConstraints = NO;
     resultAmountLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:resultAmountLabel];
     self.resultAmountLabel = resultAmountLabel;
-    
-    // rate between currencies label
+}
+
+- (void)setupRateBetweenCurrenciesLabel {
     UILabel *rateBetweenCurrenciesLabel = [[UILabel alloc] init];
     rateBetweenCurrenciesLabel.translatesAutoresizingMaskIntoConstraints = NO;
     rateBetweenCurrenciesLabel.textAlignment = NSTextAlignmentCenter;
@@ -255,119 +262,6 @@ replacementString:(NSString *)string {
     }
     
     [self updateAmountAndRateForAmount:[self.inputAmountTextField.text doubleValue]];
-}
-
-#pragma mark - Layout
-
-- (NSArray<NSLayoutConstraint *> *)createConstraintsForBackgroundView {
-    return [NSLayoutConstraint constraintsForWrappedSubview:self.backgroundView
-                                                 withInsets:UIEdgeInsetsZero];
-}
-
-- (NSArray<NSLayoutConstraint *> *)createConstraintsForConverterViews {
-    NSMutableArray *resultConstraints = [[NSMutableArray alloc] init];
-    
-    NSArray *inputAmountHorizontalConstraints =
-        [NSLayoutConstraint horizontalConstraintsForWrappedSubview:self.inputAmountTextField
-                                                        withInsets:UIEdgeInsetsMake(0, 20, 0, 20)];
-    
-    [resultConstraints addObjectsFromArray:inputAmountHorizontalConstraints];
-    
-    id <UILayoutSupport> topLayout = self.topLayoutGuide;
-    
-    NSArray *verticalConstraints =
-        [NSLayoutConstraint constraintsWithVisualFormat:
-         @"V:[topLayout]-"
-         "[_inputAmountTextField]-20-"
-         "[_fromCurrencyCarouselView(40)]-20-"
-         "[_invertCurrenciesButton]-20-"
-         "[_toCurrencyCarouselView(40)]-20-"
-         "[_resultAmountLabel]-10-[_rateBetweenCurrenciesLabel]"
-                                                  views:NSDictionaryOfVariableBindings(_inputAmountTextField,
-                                                                                       topLayout,
-                                                                                       _resultAmountLabel,
-                                                                                       _fromCurrencyCarouselView,
-                                                                                       _invertCurrenciesButton,
-                                                                                       _toCurrencyCarouselView,
-                                                                                       _rateBetweenCurrenciesLabel)];
-    [resultConstraints addObjectsFromArray:verticalConstraints];
-    
-    NSArray *resultAmountHorizontalConstraints =
-        [NSLayoutConstraint horizontalConstraintsForWrappedSubview:self.resultAmountLabel
-                                                        withInsets:UIEdgeInsetsZero];
-    
-    [resultConstraints addObjectsFromArray:resultAmountHorizontalConstraints];
-    
-    NSArray *fromCarouselHorizontalConstraints =
-        [NSLayoutConstraint horizontalConstraintsForWrappedSubview:self.fromCurrencyCarouselView
-                                                        withInsets:UIEdgeInsetsZero];
-    
-    [resultConstraints addObjectsFromArray:fromCarouselHorizontalConstraints];
-    
-    NSArray *toCarouselHorizontalConstraints =
-        [NSLayoutConstraint horizontalConstraintsForWrappedSubview:self.toCurrencyCarouselView
-                                                        withInsets:UIEdgeInsetsZero];
-    
-    [resultConstraints addObjectsFromArray:toCarouselHorizontalConstraints];
-    
-    NSLayoutConstraint *buttonHorizontalConstraint =
-        [NSLayoutConstraint constraintWithItem:self.invertCurrenciesButton
-                                     attribute:NSLayoutAttributeCenterX
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view
-                                     attribute:NSLayoutAttributeCenterX
-                                    multiplier:1
-                                      constant:0];
-    
-    [resultConstraints addObject:buttonHorizontalConstraint];
-    
-    NSLayoutConstraint *highlightTopConstraint =
-        [NSLayoutConstraint constraintWithItem:self.currentCurrenciesHighlightView
-                                     attribute:NSLayoutAttributeTop
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.fromCurrencyCarouselView
-                                     attribute:NSLayoutAttributeTop
-                                    multiplier:1
-                                      constant:-10];
-    
-    NSLayoutConstraint *highlightBottomConstraint =
-        [NSLayoutConstraint constraintWithItem:self.currentCurrenciesHighlightView
-                                     attribute:NSLayoutAttributeBottom
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.toCurrencyCarouselView
-                                     attribute:NSLayoutAttributeBottom
-                                    multiplier:1
-                                      constant:10];
-    
-    NSLayoutConstraint *highlightWidthConstraint =
-        [NSLayoutConstraint constraintWithItem:self.currentCurrenciesHighlightView
-                                     attribute:NSLayoutAttributeWidth
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view
-                                     attribute:NSLayoutAttributeWidth
-                                    multiplier:0.33
-                                      constant:0];
-    
-    NSLayoutConstraint *highlightCenterConstraint =
-    
-        [NSLayoutConstraint constraintWithItem:self.currentCurrenciesHighlightView
-                                     attribute:NSLayoutAttributeCenterX
-                                     relatedBy:NSLayoutRelationEqual
-                                        toItem:self.view
-                                     attribute:NSLayoutAttributeCenterX
-                                    multiplier:1
-                                      constant:0];
-    
-    [resultConstraints addObjectsFromArray:@[highlightTopConstraint,
-                                             highlightBottomConstraint,
-                                             highlightWidthConstraint,
-                                             highlightCenterConstraint]];
-    
-    [resultConstraints addObjectsFromArray:[NSLayoutConstraint horizontalConstraintsForWrappedSubview:self.rateBetweenCurrenciesLabel
-                                                                                           withInsets:UIEdgeInsetsZero]];
-    
-    
-    return resultConstraints;
 }
 
 @end

@@ -34,6 +34,7 @@
 		766D14C71F680F2E00AA10E8 /* InitialRatesMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = 766D14C61F680F2E00AA10E8 /* InitialRatesMap.plist */; };
 		766D14CB1F69592700AA10E8 /* CCLocalDataLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14CA1F69592600AA10E8 /* CCLocalDataLoader.m */; };
 		766D14CD1F695B5100AA10E8 /* CCRatesLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14CC1F695B5100AA10E8 /* CCRatesLoaderTests.m */; };
+		766D14D01F695F6500AA10E8 /* CCCurrencyConverterViewController+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 766D14CF1F695F6500AA10E8 /* CCCurrencyConverterViewController+Layout.m */; };
 		F288A7BCC338C5F0940966B6 /* libPods-CurrencyConverterUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB5548A53154BF175EDD6E2C /* libPods-CurrencyConverterUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,8 @@
 		766D14C91F69592600AA10E8 /* CCLocalDataLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCLocalDataLoader.h; path = Models/CCLocalDataLoader.h; sourceTree = "<group>"; };
 		766D14CA1F69592600AA10E8 /* CCLocalDataLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCLocalDataLoader.m; path = Models/CCLocalDataLoader.m; sourceTree = "<group>"; };
 		766D14CC1F695B5100AA10E8 /* CCRatesLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRatesLoaderTests.m; sourceTree = "<group>"; };
+		766D14CE1F695F6500AA10E8 /* CCCurrencyConverterViewController+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CCCurrencyConverterViewController+Layout.h"; path = "ViewControllers/CCCurrencyConverterViewController+Layout.h"; sourceTree = "<group>"; };
+		766D14CF1F695F6500AA10E8 /* CCCurrencyConverterViewController+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CCCurrencyConverterViewController+Layout.m"; path = "ViewControllers/CCCurrencyConverterViewController+Layout.m"; sourceTree = "<group>"; };
 		7738C2FFE76221AD6B76BDFD /* Pods-CurrencyConverterUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverterUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyConverterUITests/Pods-CurrencyConverterUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		BE3CD2789DF010AFA5425CBA /* Pods-CurrencyConverter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrencyConverter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrencyConverter/Pods-CurrencyConverter.debug.xcconfig"; sourceTree = "<group>"; };
 		DB5548A53154BF175EDD6E2C /* libPods-CurrencyConverterUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CurrencyConverterUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -259,6 +262,8 @@
 				766D14AF1F67EC8500AA10E8 /* CCCurrencyConverterViewController.m */,
 				766D14C21F68036F00AA10E8 /* CCCurrencyCarouselViewController.h */,
 				766D14C31F68036F00AA10E8 /* CCCurrencyCarouselViewController.m */,
+				766D14CE1F695F6500AA10E8 /* CCCurrencyConverterViewController+Layout.h */,
+				766D14CF1F695F6500AA10E8 /* CCCurrencyConverterViewController+Layout.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -602,6 +607,7 @@
 				766D14AD1F67EA5800AA10E8 /* CCFloatingBackgroundView.m in Sources */,
 				766D149E1F67E45E00AA10E8 /* CCRatesLoader.m in Sources */,
 				766D146A1F67E3F600AA10E8 /* AppDelegate.m in Sources */,
+				766D14D01F695F6500AA10E8 /* CCCurrencyConverterViewController+Layout.m in Sources */,
 				766D14C41F68036F00AA10E8 /* CCCurrencyCarouselViewController.m in Sources */,
 				766D14A11F67E48500AA10E8 /* CCRemoteDataLoader.m in Sources */,
 				766D14671F67E3F500AA10E8 /* main.m in Sources */,
